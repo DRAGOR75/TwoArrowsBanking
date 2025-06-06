@@ -1,0 +1,30 @@
+package dragor.com.webapp.controller;
+
+import dragor.com.webapp.dto.AccountDto;
+import dragor.com.webapp.entity.Account;
+import dragor.com.webapp.entity.User;
+import dragor.com.webapp.service.AccountService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/accounts") // Fixed mapping
+@RequiredArgsConstructor
+public class AccountController {
+    private final AccountService accountService;
+    @PostMapping
+    public ResponseEntity<Account> createAccount(@RequestBody AccountDto accountdto, Authentication authentication) throws Exception {
+        var user = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(accountService.createAccount(accountdto,user));
+    }
+    @GetMapping
+    public ResponseEntity<List<Account>> getUsersAccounts(Authentication authentication){
+        var user = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(accountService.getUserAccounts(user.getUid()));
+    }
+
+}

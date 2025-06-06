@@ -2,6 +2,7 @@ package dragor.com.webapp.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -47,6 +48,7 @@ public class Account {
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
+    @JsonIgnore
     private User owner;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL,fetch = FetchType.LAZY)

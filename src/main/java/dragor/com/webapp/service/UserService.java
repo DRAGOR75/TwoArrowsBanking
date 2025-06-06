@@ -72,7 +72,7 @@ public class UserService {
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .dob(dto.getDob())
                 .roles(List.of("USER"))
-                .tag("io_" + dto.getUsername())
+                .tag("ta_" + dto.getUsername())
                 .build();
     }
 
