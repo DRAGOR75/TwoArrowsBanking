@@ -1,7 +1,9 @@
 package dragor.com.webapp.controller;
 
 import dragor.com.webapp.dto.AccountDto;
+import dragor.com.webapp.dto.TransferDto;
 import dragor.com.webapp.entity.Account;
+import dragor.com.webapp.entity.Transaction;
 import dragor.com.webapp.entity.User;
 import dragor.com.webapp.service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,12 @@ public class AccountController {
     public ResponseEntity<List<Account>> getUsersAccounts(Authentication authentication){
         var user = (User) authentication.getPrincipal();
         return ResponseEntity.ok(accountService.getUserAccounts(user.getUid()));
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<Transaction>transferFunds(@RequestBody TransferDto transferDto, Authentication authentication) throws Exception {
+        var user=(User)authentication.getPrincipal();
+        return ResponseEntity.ok(accountService.transferFunds(transferDto, user));
     }
 
 }
