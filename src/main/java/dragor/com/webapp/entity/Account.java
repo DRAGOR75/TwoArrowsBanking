@@ -52,6 +52,7 @@ public class Account {
     private User owner;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Transaction> transactions;
 }
 

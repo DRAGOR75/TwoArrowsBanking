@@ -1,6 +1,7 @@
 package dragor.com.webapp.controller;
 
 import dragor.com.webapp.dto.AccountDto;
+import dragor.com.webapp.dto.ConvertDto;
 import dragor.com.webapp.dto.TransferDto;
 import dragor.com.webapp.entity.Account;
 import dragor.com.webapp.entity.Transaction;
@@ -12,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/accounts") // Fixed mapping
@@ -33,6 +35,16 @@ public class AccountController {
     public ResponseEntity<Transaction>transferFunds(@RequestBody TransferDto transferDto, Authentication authentication) throws Exception {
         var user=(User)authentication.getPrincipal();
         return ResponseEntity.ok(accountService.transferFunds(transferDto, user));
+    }
+    @GetMapping("/rates")
+    public ResponseEntity<Map<String,Double>>getExchangeRates(){
+        return ResponseEntity.ok(accountService.getExchangeRate());
+    }
+
+    @PostMapping("/convert")
+    public ResponseEntity<Transaction>conevrtCurrencies(@RequestBody ConvertDto convertDto,Authentication authentication)throws Exception{
+        var user=(User)authentication.getPrincipal();
+        return ResponseEntity.ok(accountService.convertCurrencies(convertDto,user));
     }
 
 }

@@ -7,6 +7,6 @@ public enum Type {
 
     DEBIT,
 
-    CREDIT
+    CONVERSION, CREDIT
 
 }
