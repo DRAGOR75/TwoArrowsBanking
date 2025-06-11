@@ -3,6 +3,8 @@ package dragor.com.webapp.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dragor.com.webapp.util.StatusConverter;
+import dragor.com.webapp.util.TypeConverter;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,15 +40,18 @@ public class Transaction {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Convert(converter = StatusConverter.class)
     private Status status;
-
+    @Convert(converter = TypeConverter.class)
     private Type type;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "card_id")
     private Card card;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "owner_id")
     private User owner;
 

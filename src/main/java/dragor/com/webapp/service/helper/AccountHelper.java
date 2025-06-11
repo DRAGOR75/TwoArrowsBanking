@@ -133,4 +133,16 @@ public class AccountHelper {
                 .build();
         return transactionRepository.save(transaction);
     }
+
+    public Transaction createAccountTransaction(double amount,Type type,double tfees,User user,Account account) {
+        var tx=Transaction.builder()
+                .tfees(tfees)
+                .amount(amount)
+                .type(type)
+                .status(Status.COMPLETED)
+                .owner(user)
+                .account(account)
+                .build();
+        return transactionRepository.save(tx);
+    }
 }

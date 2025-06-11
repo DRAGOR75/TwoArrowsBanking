@@ -9,6 +9,7 @@ import dragor.com.webapp.entity.User;
 import dragor.com.webapp.repository.AccountRepository;
 import dragor.com.webapp.service.helper.AccountHelper;
 import dragor.com.webapp.util.RandomUtil;
+import jakarta.transaction.Transactional;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AccountService {
 
     private final AccountHelper accountHelper;
